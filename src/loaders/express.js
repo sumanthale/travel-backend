@@ -37,6 +37,14 @@ export default (app) => {
       })
       .end();
   });
+  app.get("/home", (_req, res) => {
+    return res
+      .status(200)
+      .json({
+        data: "Project is successfully working...🎉🎉",
+      })
+      .end();
+  });
 
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
