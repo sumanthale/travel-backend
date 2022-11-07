@@ -1,19 +1,18 @@
 import { Router } from "express";
-// import { auth } from "../middlewares/index.js";
-// import {
-//   register,
-//   login,
-//   getUser,
-//   deleteUser,
-// } from "../controllers/user/index.js";
+import {
+  register,
+  getUser,
+  editUser,
+  deleteUser,
+} from "../controllers/user/index.js";
 
 const router = Router();
 
 // AUTH
-// router.post("/", register);
-// router.post("/login", login);
 
-// router.get("/", auth, getUser);
-// router.delete("/", auth, deleteUser);
+router.get("/", getUser);
+router.post("/", register);
+router.put("/", editUser);
+router.delete("/", deleteUser);
 
 export default router;
