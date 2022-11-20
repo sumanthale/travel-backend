@@ -6,7 +6,6 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
-      // unique: true,
     },
     uid: {
       type: String,
@@ -31,10 +30,7 @@ const userSchema = new Schema(
     phone: {
       type: String,
     },
-    // gender: {
-    //   type: String,
-    //   enum: ["male", "female", "other"],
-    // },
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
     address: {
       type: String,
     },
