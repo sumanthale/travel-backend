@@ -1,9 +1,9 @@
-import { User } from "../../../models/index.js";
+import { Post } from "../../../models/index.js";
 
 export default async (req, res) => {
-  const { id } = req.body;
+  console.log(req.body);
 
-  const { deletedCount } = await User.deleteOne({ id }).catch((err) => {
+  const { deletedCount } = await Post.deleteOne(req.body).catch((err) => {
     return res.status(500).json({ err });
   });
   if (deletedCount > 0) {

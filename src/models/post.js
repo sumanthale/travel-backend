@@ -14,12 +14,9 @@ const postSchema = new Schema(
     images: {
       type: [String],
     },
-    // user: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // },
     user: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     rating: {
       type: Number,
