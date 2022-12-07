@@ -1,7 +1,6 @@
 import express from "express";
 import { port } from "./src/config/index.js";
 import loader from "./src/loaders/index.js";
-import stripe from "stripe";
 const app = express();
 
 loader(app);
