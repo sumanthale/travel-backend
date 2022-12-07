@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 config();
-const { DB_URI, PORT } = process.env;
+const { PORT } = process.env;
 export const port = PORT || 8080;
-export const dbUri = DB_URI;
+export const dbUri =
+  "mongodb+srv://admin:admin123@travel.zldvkug.mongodb.net/diary?retryWrites=true&w=majority";
 export const prefix = "/api";

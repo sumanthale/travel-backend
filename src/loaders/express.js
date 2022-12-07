@@ -12,7 +12,6 @@ const stripeObj = stripe(
   "sk_test_51MC7O1SALYbO5cv1vrObjkSKHTczo9No2gIt5SFeiBjNWc9OSQlA8XUgvcbnCMX8x8ZrjoEO1d7YmFOCIrQIWBgH00pt9qpq2u"
 );
 config();
-const { CLIENT_URI } = process.env;
 export default (app) => {
   process.on("uncaughtException", async (error) => {
     console.log(error);
@@ -23,24 +22,10 @@ export default (app) => {
   });
 
   app.enable("trust proxy");
-  var allowedOrigins = [
-    "http://localhost:3000",
-    "https://travel-diaries-capstone.netlify.app",
-  ];
+
   app.use(
     cors({
-      origin: function (origin, callback) {
-        // allow requests with no origin
-        // (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-          var msg =
-            "The CORS policy for this site does not " +
-            "allow access from the specified Origin.";
-          return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-      },
+      origin: "*",
     })
   );
   app.use(bodyParser.urlencoded({ extended: false }));
@@ -65,15 +50,13 @@ export default (app) => {
 
   app.post("/create-checkout-session", async (req, res) => {
     try {
-      console.log(CLIENT_URI);
       const { quantity } = req.body;
-      console.log(quantity);
       const session = await stripeObj.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
         line_items: [{ price: "price_1MC98sSALYbO5cv1EWvSjIRL", quantity }],
-        success_url: `${CLIENT_URI}/success`,
-        cancel_url: `${CLIENT_URI}/failed`,
+        success_url: `https://travel-diaries-capstone.netlify.app/success`,
+        cancel_url: `https://travel-diaries-capstone.netlify.app/failed`,
       });
       res.json({ url: session.url });
     } catch (e) {
