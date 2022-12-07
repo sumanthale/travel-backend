@@ -3,6 +3,9 @@ import { User } from "../../../../models/index.js";
 
 export default async (req, res) => {
   try {
+    if (req.method === "OPTIONS") {
+      return res.status(200).json({ body: "OK" });
+    }
     const postObj = req.body;
     console.log(postObj);
     const uid = postObj.uid;

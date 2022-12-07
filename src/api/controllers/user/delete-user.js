@@ -1,6 +1,9 @@
 import { User } from "../../../models/index.js";
 
 export default async (req, res) => {
+  if (req.method === "OPTIONS") {
+    return res.status(200).json({ body: "OK" });
+  }
   const { uid } = req.body;
 
   const { deletedCount } = await User.deleteOne({ uid }).catch((err) => {

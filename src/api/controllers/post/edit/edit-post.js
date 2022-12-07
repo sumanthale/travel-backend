@@ -1,6 +1,10 @@
 import { Post } from "../../../../models/index.js";
 
 export default async (req, res) => {
+  if (req.method === "OPTIONS") {
+    return res.status(200).json({ body: "OK" });
+  }
+
   const data = req.body;
   const { _id } = data;
   console.log(data);

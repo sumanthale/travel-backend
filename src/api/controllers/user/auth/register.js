@@ -3,6 +3,9 @@ import { validateRegister } from "../../../validators/user.validator.js";
 
 export default async (req, res) => {
   try {
+    if (req.method === "OPTIONS") {
+      return res.status(200).json({ body: "OK" });
+    }
     const { error } = validateRegister(req.body);
     const { email, uid, password } = req.body;
     if (error) {
