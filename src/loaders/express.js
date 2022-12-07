@@ -3,7 +3,6 @@ import cors from "cors";
 import compression from "compression";
 import morgan from "morgan";
 import helmet from "helmet";
-import { config } from "dotenv";
 import { prefix } from "./../config/index.js";
 import routes from "./../api/routes/index.js";
 import bodyParser from "body-parser";
@@ -11,7 +10,6 @@ import stripe from "stripe";
 const stripeObj = stripe(
   "sk_test_51MC7O1SALYbO5cv1vrObjkSKHTczo9No2gIt5SFeiBjNWc9OSQlA8XUgvcbnCMX8x8ZrjoEO1d7YmFOCIrQIWBgH00pt9qpq2u"
 );
-config();
 export default (app) => {
   process.on("uncaughtException", async (error) => {
     console.log(error);
@@ -23,11 +21,7 @@ export default (app) => {
 
   app.enable("trust proxy");
 
-  app.use(
-    cors({
-      origin: "*",
-    })
-  );
+  app.use(cors());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(morgan("dev"));
